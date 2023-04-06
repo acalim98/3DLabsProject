@@ -11,3 +11,11 @@ app = Flask(__name__)
 def hello_world():
     return "<p>Hello, World!</p>"
 
+@app.route("/base")
+def base():
+    return render_template('base.html')
+
+@app.route("/example")
+def example():
+    text = 'Hello, World! This is an example page!'
+    return render_template('example.html', text=text)
