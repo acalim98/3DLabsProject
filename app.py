@@ -19,3 +19,8 @@ def base():
 def example():
     text = 'Hello, World! This is an example page!'
     return render_template('example.html', text=text)
+
+@app.route("/link")
+def my_link():
+    my_link_text = "This is a link!"
+    return render_template('example_link.html', text=my_link_text)
