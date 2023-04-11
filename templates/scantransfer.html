@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Transfer Requests</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: navy;
+            color: white;
+            padding: 8px;
+            text-align: left;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scan Transfer Requests</h1>
+    <table>
+        <tr>
+            <th>Request Date</th>
+            <th>Requested By</th>
+            <th>Study Name</th>
+            <th>MRN</th>
+            <th>Destination</th>
+            <th>Transfer Needed By</th>
+            <th>Status</th>
+            <th>Transfer Details</th>
+        </tr>
+        {% for row in table_data %}
+        <tr>
+            <td>{{ row.request_date }}</td>
+            <td>{{ row.requested_by }}</td>
+            <td>{{ row.study_name }}</td>
+            <td>{{ row.mrn }}</td>
+            <td>{{ row.destination }}</td>
+            <td>{{ row.transfer_needed_by }}</td>
+            <td>{{ row.status }}</td>
+            <td>{{ row.transfer_details }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

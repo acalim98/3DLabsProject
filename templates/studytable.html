@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter New Study</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: navy;
+            color: white;
+            padding: 8px;
+            text-align: left;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter New Study</h1>
+    <table>
+        <tr>
+            <th>CC#</th>
+            <th>Name</th>
+            <th>Fund/DPA#</th>
+            <th>Criteria</th>
+            <th>PI Name</th>
+            <th>Comments</th>
+            <th>Entered By</th>
+        </tr>
+        {% for row in study_data %}
+        <tr>
+            <td>{{ row.cc_number }}</td>
+            <td>{{ row.name }}</td>
+            <td>{{ row.fund_dpa_number }}</td>
+            <td>{{ row.criteria }}</td>
+            <td>{{ row.pi_name }}</td>
+            <td>{{ row.comments }}</td>
+            <td>{{ row.entered_by }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
