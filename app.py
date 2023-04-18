@@ -53,3 +53,19 @@ def success():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+   class SubjectInfoForm(FlaskForm):
+    email = StringField('Email:', validators=[DataRequired()])
+    patient = SelectField('Patient:', choices=[('', 'Name'), ('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'), ('E', 'E')])
+    baseline_date = DateField('Baseline Date:', validators=[DataRequired()])
+    submit = SubmitField('Save Changes')
+
+@app.route('/', methods=['GET', 'POST'])
+def subject_info():
+    form = SubjectInfoForm()
+    if form.validate_on_submit():
+        # You can process the form data here
+        return redirect(url_for('subject_info'))
+    return render_template('subject_info.html', form=form) 
+if __name__ == '__main__':
+    app.run(debug=True)
