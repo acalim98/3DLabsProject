@@ -1,0 +1,28 @@
+{% extends "newpatient.html" %}  <!-- replace with your base HTML file -->
+{% block content %}
+  <h2>New Patient</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <p>
+      {{ form.first_name.label }}<br>
+      {{ form.first_name(size=20) }}
+    </p>
+    <p>
+      {{ form.last_name.label }}<br>
+      {{ form.last_name(size=20) }}
+    </p>
+    <p>
+      {{ form.mrn.label }}<br>
+      {{ form.mrn(size=20) }}
+    </p>
+    <p>
+      {{ form.birthdate.label }}<br>
+      {{ form.birthdate() }}
+    </p>
+    <p>
+      {{ form.comment.label }}<br>
+      {{ form.comment() }}
+    </p>
+    <p>{{ form.submit() }}</p>
+  </form>
+{% endblock %}
