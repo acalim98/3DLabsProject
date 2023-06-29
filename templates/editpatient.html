@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New Patient</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+      html, body {
+        height: 100%;
+        background: #f5f5f5;
+      }
+      .form-control:focus {
+        box-shadow: none;
+        border-color: #052049;
+      }
+      .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      }
+      .form-container h1 {
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #052049;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-container .form-control, .form-container .btn {
+        min-height: 40px;
+        border-radius: 2px; 
+        transition: all 0.5s;
+      }
+      .form-container .btn {
+        background: #052049 !important;
+        border: none;
+        color: #fff;
+      }
+      .form-container .btn:hover, .form-container .btn:focus {
+        background: #033268 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5">
+      <div class="form-container">
+        <form action="/editpatient" method="post">
+          <h1 class="mb-4">UCSF 3D Labs</h1>
+          <div class="form-group">
+            <label for="first_name">First Name:</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" required>
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name:</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" required>
+          </div>
+          <div class="form-group">
+            <label for="mrn">MRN:</label>
+            <input type="text" class="form-control" id="mrn" name="mrn" required>
+          </div>
+          <div class="form-group">
+            <label for="birthdate">Birthdate:</label>
+            <input type="date" class="form-control" id="birthdate" name="birthdate" required>
+          </div>
+          <div class="form-group">
+            <label for="comment">Comments:</label>
+            <textarea class="form-control" id="comment" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-block">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

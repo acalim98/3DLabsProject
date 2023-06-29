@@ -4,50 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scan Transfer Requests</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
         }
-        th {
-            background-color: navy;
-            color: white;
-            padding: 8px;
-            text-align: left;
+        .hero {
+            background-color: #003366;
+            color: #ffffff;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        .hero h1 {
+            margin-bottom: 20px;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Scan Transfer Requests</h1>
-    <form action="/submit_scan_transfer" method="post">
-        <table>
-            <tr>
-                <th>Request Date</th>
-                <th>Requested By</th>
-                <th>Study Name</th>
-                <th>MRN</th>
-                <th>Destination</th>
-                <th>Transfer Needed By</th>
-                <th>Status</th>
-                <th>Transfer Details</th>
-            </tr>
-            <tr>
-                <td><input type="date" id="created_at" name="created_at" required></td>
-                <td><input type="number" id="user_id" name="user_id" required></td>
-                <td><input type="text" id="study_subject_id" name="study_subject_id"></td>
-                <td><input type="number" id="scan_id" name="scan_id" required></td>
-                <td><input type="text" id="destination" name="destination"></td>
-                <td><input type="date" id="transfer_needed_by" name="transfer_needed_by"></td>
-                <td><input type="text" id="status" name="status"></td>
-                <td><textarea id="comment" name="comment"></textarea></td>
-            </tr>
-            <tr>
-                <td colspan="8">
-                    <input type="submit" value="Submit">
+    <section class="hero">
+        <h1>UCSF Medical Center</h1>
+        <p>Patient Information System</p>
+    </section>
+    <div class="container">
+        <h2 class="mb-4">Scan Transfer Requests</h2>
+        <form action="/submit_scan_transfer" method="post">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Request Date</th>
+                        <th>Requested By</th>
+                        <th>Study Name</th>
+                        <th>MRN</th>
+                        <th>Destination</th>
+                        <th>Transfer Needed By</th>
+                        <th>Status</th>
+                        <th>Transfer Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="date" class="form-control" id="created_at" name="created_at" required></td>
+                        <td><input type="number" class="form-control" id="user_id" name="user_id" required></td>
+                        <td><input type="text" class="form-control" id="study_subject_id" name="study_subject_id"></td>
+                        <td><input type="number" class="form-control" id="scan_id" name="scan_id" required></td>
+                        <td><input type="text" class="form-control" id="destination" name="destination"></td>
+                        <td><input type="date" class="form-control" id="transfer_needed_by" name="transfer_needed_by"></td>
+                        <td><input type="text" class="form-control" id="status" name="status"></td>
+                        <td><textarea class="form-control" id="comment" name="comment"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -4,54 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter New Study</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
         }
-        th {
-            background-color: navy;
-            color: white;
-            padding: 8px;
-            text-align: left;
+        .hero {
+            background-color: #003366;
+            color: #ffffff;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        .hero h1 {
+            margin-bottom: 20px;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Enter New Study</h1>
-    <form>
-        <table>
-            <tr>
-                <th>CC#</th>
-                <th>Name</th>
-                <th>Fund/DPA#</th>
-                <th>Criteria</th>
-                <th>PI Name</th>
-                <th>Comments</th>
-                <th>Entered By</th>
-            </tr>
-            <!-- Add your data rows here -->
-            <!-- ... -->
-            <!-- Add 4 empty rows -->
-            <tr>
-                <td><input type="text" name="CC"></td>
-                <td><input type="text" name="Name"></td>
-                <td><input type="text" name="Fund/DPA#"></td>
-                <td><input type="text" name="Criteria"></td>
-                <td><input type="text" name="PI Name"></td>
-                <td><input type="text" name="Comments"></td>
-                <td><input type="text" name="Entered By"></td>
-            </tr>
-            <!-- ... Add more rows as needed ... -->
-        </table>
-        <input type="submit" value="Submit">
-    </form>
+    <section class="hero">
+        <h1>UCSF Medical Center</h1>
+        <p>Patient Information System</p>
+    </section>
+    <div class="container">
+        <h2 class="mb-4">Enter New Study</h2>
+        <form action="/submit_new_study" method="post">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>CC#</th>
+                        <th>Name</th>
+                        <th>Fund/DPA#</th>
+                        <th>Criteria</th>
+                        <th>PI Name</th>
+                        <th>Comments</th>
+                        <th>Entered By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Add your data rows here -->
+                    <!-- ... -->
+                    <!-- Add 4 empty rows -->
+                    <tr>
+                        <td><input type="text" class="form-control" name="CC"></td>
+                        <td><input type="text" class="form-control" name="Name"></td>
+                        <td><input type="text" class="form-control" name="Fund/DPA#"></td>
+                        <td><input type="text" class="form-control" name="Criteria"></td>
+                        <td><input type="text" class="form-control" name="PI Name"></td>
+                        <td><input type="text" class="form-control" name="Comments"></td>
+                        <td><input type="text" class="form-control" name="Entered By"></td>
+                    </tr>
+                    <!-- ... Add more rows as needed ... -->
+                </tbody>
+            </table>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

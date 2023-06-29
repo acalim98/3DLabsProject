@@ -4,50 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Information</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
         }
-        th {
-            background-color: rgb(13, 13, 143);
-            color: white;
-            padding: 8px;
-            text-align: left;
+        .hero {
+            background-color: #003366;
+            color: #ffffff;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        .hero h1 {
+            margin-bottom: 20px;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Patient Information</h1>
-    <form action="/submit_patient_info" method="post">
-        <table>
-            <tr>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>MRN</th>
-                <th>Birthdate</th>
-                <th>Comments</th>
-            </tr>
-            <tr>
-                <td><input type="text" id="last_name" name="last_name"></td>
-                <td><input type="text" id="first_name" name="first_name"></td>
-                <td><input type="text" id="mrn" name="mrn" required></td>
-                <td><input type="date" id="birthdate" name="birthdate"></td>
-                <td><input type="text" id="comment" name="comment"></td>
-            </tr>
-            <tr>
-                <td colspan="5">
-                    <input type="submit" value="Submit">
-                </td>
-            </tr>
-        </table>
-    </form>
+    <section class="hero">
+        <h1>UCSF Medical Center</h1>
+        <p>Patient Information System</p>
+    </section>
+    <div class="container">
+        <h2 class="mb-4">New Patient Form</h2>
+        <form action="/submit_patient_info" method="post">
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" class="form-control" id="first_name" name="first_name">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" class="form-control" id="last_name" name="last_name">
+            </div>
+            <div class="form-group">
+                <label for="mrn">MRN</label>
+                <input type="text" class="form-control" id="mrn" name="mrn" required>
+            </div>
+            <div class="form-group">
+                <label for="birthdate">Birthdate</label>
+                <input type="date" class="form-control" id="birthdate" name="birthdate">
+            </div>
+            <div class="form-group">
+                <label for="comment">Comment</label>
+                <input type="text" class="form-control" id="comment" name="comment">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <h2 class="mt-5 mb-4">Patient Records</h2>
+        {% for patient in patients %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ patient.first_name }} {{ patient.last_name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">MRN: {{ patient.mrn }}</h6>
+                    <p class="card-text">
+                        <strong>Birthdate:</strong> {{ patient.birthdate }}
+                        <br>
+                        <strong>Comment:</strong> {{ patient.comment }}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
