@@ -1,21 +1,27 @@
 import os
 import datetime
+import sqlite3
+from sqlite3 import Error
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
-import task_utils
+from flask import request, redirect, url_for, render_template
+from flask_login import UserMixin, login_user
+from app import app, db
+from models import User, ScanTransferRequest
 
-db = SQLAlchemy()
+
 def create_connection():
-    conn = None;
+    conn = None
     try:
-        conn = sqlite3.connect(':memory:') # creates a RAM database for demo purposes
+        conn = sqlite3.connect(':memory:')  # creates a RAM database for demo purposes
         return conn
     except Error as e:
         print(e)
 
+
 @app.route('/submit_patient_info', methods=['POST'])
 def submit_patient_info():
-    first_name = request.form
+    # Handle patient info submission here
+    pass
 
 
 def create_table(conn):
@@ -47,36 +53,14 @@ def create_table(conn):
     except Error as e:
         print(e)
 
+
 def main():
     conn = create_connection()
     if conn is not None:
         create_table(conn)
     else:
         print("Error! Cannot create the database connection.")
-        
 
-class User(UserMixin, db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255), unique=True, nullable=False)
-    hashed_password = db.Column(db.String(255), nullable=False)
-    salt = db.Column(db.String(255))
-    email = db.Column(db.String(255))
-    first_name = db.Column(db.String(255))
-    last_name = db.Column(db.String(255))
-    role = db.Column(db.String(255))
-    created_at = db.Column(db.DateTime)
-    updated_at = db.Column(db.DateTime)
-    is_active = db.Column(db.String(255))
-    is_admin = db.Column(db.Integer, default=0)
-    is_radiologist = db.Column(db.Integer, default=0)
-    is_developer = db.Column(db.Integer, default=0)
-    is_coordinator = db.Column(db.Integer, default=0)
-    is_pi = db.Column(db.Integer, default=0)
-    is_finance = db.Column(db.Integer, default=0)
-
-    def check_password(self, password):
-        return check_password_hash(self.hashed_password, password)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -85,7 +69,7 @@ def login():
         password = request.form.get('password')
 
         user = User.query.filter_by(username=username).first()
-        
+
         if not user or not user.check_password(password):
             return redirect(url_for('login'))
 
@@ -93,30 +77,14 @@ def login():
 
         return redirect(url_for('profile'))
 
-# Scantransfer's Routes (index,add,edit,delete)
+    return render_template('login.html')
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'  # use my actual database URI
-db = SQLAlchemy(app)
 
-class ScanTransferRequest(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.Date)
-    user_id = db.Column(db.Integer)
-    study_subject_id = db.Column(db.String(80))
-    scan_id = db.Column(db.Integer)
-    destination = db.Column(db.String(80))
-    transfer_needed_by = db.Column(db.Date)
-    status = db.Column(db.String(80))
-    comment = db.Column(db.String(200))
-
-db.create_all()  # make sure to remove this line in production. 
-
-#SCantransfer route's
-@app.route('/')
+@app.route('/ScanTransferIndex')
 def index():
     requests = ScanTransferRequest.query.all()
-    return render_template('index.html', requests=requests)
+    return render_template('scantransfer.html', requests=requests)
+
 
 @app.route('/add', methods=('GET', 'POST'))
 def add():
@@ -137,23 +105,25 @@ def add():
 
     return render_template('add.html')
 
+
 @app.route('/edit/<int:id>', methods=('GET', 'POST'))
 def edit(id):
     request = ScanTransferRequest.query.get_or_404(id)
 
     if request.method == 'POST':
-        request.created_at=request.form['created_at']
-        request.user_id=request.form['user_id']
-        request.study_subject_id=request.form['study_subject_id']
-        request.scan_id=request.form['scan_id']
-        request.destination=request.form['destination']
-        request.transfer_needed_by=request.form['transfer_needed_by']
-        request.status=request.form['status']
-        request.comment=request.form['comment']
+        request.created_at = request.form['created_at']
+        request.user_id = request.form['user_id']
+        request.study_subject_id = request.form['study_subject_id']
+        request.scan_id = request.form['scan_id']
+        request.destination = request.form['destination']
+        request.transfer_needed_by = request.form['transfer_needed_by']
+        request.status = request.form['status']
+        request.comment = request.form['comment']
         db.session.commit()
         return redirect(url_for('index'))
 
-    return render_template('edit.html', request=request)  #Edit afterwards
+    return render_template('edit.html', request=request)
+
 
 @app.route('/delete/<int:id>', methods=('POST',))
 def delete(id):
