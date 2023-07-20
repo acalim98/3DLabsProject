@@ -39,30 +39,7 @@
         <p>Patient Information System</p>
     </section>
     <div class="container">
-        <h2 class="mb-4">New Patient Form</h2>
-        <form action="/submit_patient_info" method="post">
-            <div class="form-group">
-                <label for="first_name">First Name</label>
-                <input type="text" class="form-control" id="first_name" name="first_name">
-            </div>
-            <div class="form-group">
-                <label for="last_name">Last Name</label>
-                <input type="text" class="form-control" id="last_name" name="last_name">
-            </div>
-            <div class="form-group">
-                <label for="mrn">MRN</label>
-                <input type="text" class="form-control" id="mrn" name="mrn" required>
-            </div>
-            <div class="form-group">
-                <label for="birthdate">Birthdate</label>
-                <input type="date" class="form-control" id="birthdate" name="birthdate">
-            </div>
-            <div class="form-group">
-                <label for="comment">Comment</label>
-                <input type="text" class="form-control" id="comment" name="comment">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+    
 
         <h2 class="mt-5 mb-4">Patient Records</h2>
         {% for patient in patients %}

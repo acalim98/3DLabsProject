@@ -34,7 +34,7 @@ def add_study():
         )
         db.session.add(new_study)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('studytable'))
     return render_template('studytable.html', form=form)
 
 

@@ -75,12 +75,12 @@ def patient():
             last_name=form.last_name.data,
             mrn=form.mrn.data,
             birthdate=form.birthdate.data,
-            comment=comment
+            comments=comment
         )
         db.session.add(new_patient)
         db.session.commit()
-        return redirect(url_for('patient_success'))
-    return render_template('newpatient.html', form=form)
+        return redirect(url_for('patientindex'))
+    return render_template('new_patient.html', form=form)
 
 
 @app.route('/patient/edit/<int:patient_id>', methods=['GET', 'POST'])
