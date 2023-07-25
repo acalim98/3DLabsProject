@@ -5,8 +5,11 @@ from sqlite3 import Error
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, redirect, url_for, render_template
 from flask_login import UserMixin, login_user
-from app import app, db
-from models import User, ScanTransferRequest
+from app import app
+from models import User, db, ScanTransferRequest
+from flask_wtf import FlaskForm
+from wtforms import BooleanField, StringField, validators, TextAreaField, SubmitField, SelectField, DateField, IntegerField
+from wtforms.validators import DataRequired, Optional
 
 
 def create_connection():
@@ -61,6 +64,13 @@ def main():
     else:
         print("Error! Cannot create the database connection.")
 
+class ScantransferForm(FlaskForm):
+    user_id = IntegerField('User ID', validators=[DataRequired()])
+    scan_id = IntegerField('Scan ID', validators=[DataRequired()])
+    destination = StringField('Destination', validators=[DataRequired()])
+    transfer_needed_by = DateField('Transfer Needed By', validators=[DataRequired()])
+    comment = TextAreaField('Comment', validators=[Optional()])
+    submit = SubmitField('Save Changes')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -81,29 +91,28 @@ def login():
 
 
 @app.route('/ScanTransferIndex')
-def index():
+def scantransferindex():
     requests = ScanTransferRequest.query.all()
     return render_template('scantransfer.html', requests=requests)
 
 
 @app.route('/addscantransfer', methods=('GET', 'POST'))
-def add():
-    if request.method == 'POST':
-        request = ScanTransferRequest(
-            created_at=request.form['created_at'],
-            user_id=request.form['user_id'],
-            study_subject_id=request.form['study_subject_id'],
-            scan_id=request.form['scan_id'],
-            destination=request.form['destination'],
-            transfer_needed_by=request.form['transfer_needed_by'],
-            status=request.form['status'],
-            comment=request.form['comment']
+def addscantransfer():
+    form=ScantransferForm()
+    if form.validate_on_submit():
+        comment = form.comment.data if form.comment.data else None
+        new_scantransfer = ScanTransferRequest(
+            user_id=form.user_id.data,
+            scan_id=form.scan_id.data,
+            destination=form.destination.data,
+            transfer_needed_by=form.transfer_needed_by.data,
+            comment=comment
         )
-        db.session.add(request)
+        db.session.add(new_scantransfer)
         db.session.commit()
-        return redirect(url_for('ScanTransferIndex'))
+        return redirect(url_for('scantransferindex'))
 
-    return render_template('add.html')
+    return render_template('addscantransfer.html',form=form)
 
 
 @app.route('/edit/<int:id>', methods=('GET', 'POST'))

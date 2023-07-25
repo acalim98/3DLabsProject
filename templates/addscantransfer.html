@@ -1,0 +1,28 @@
+{% extends "base.html" %}  <!-- replace with your base HTML file -->
+{% block content %}
+  <h2>New Scantransfer</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <p>
+      {{ form.user_id.label }}<br>
+      {{ form.user_id(size=20) }}
+    </p>
+    <p>
+      {{ form.scan_id.label }}<br>
+      {{ form.scan_id(size=20) }}
+    </p>
+    <p>
+      {{ form.destination.label }}<br>
+      {{ form.destination(size=20) }}
+    </p>
+    <p>
+      {{ form.transfer_needed_by.label }}<br>
+      {{ form.transfer_needed_by() }}
+    </p>
+    <p>
+      {{ form.comment.label }}<br>
+      {{ form.comment() }}
+    </p>
+    <p>{{ form.submit() }}</p>
+  </form>
+{% endblock %}

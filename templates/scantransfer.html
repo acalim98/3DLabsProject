@@ -40,35 +40,19 @@
     </section>
     <div class="container">
         <h2 class="mb-4">Scan Transfer Requests</h2>
-        <form action="/submit_scan_transfer" method="post">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Request Date</th>
-                        <th>Requested By</th>
-                        <th>Study Name</th>
-                        <th>MRN</th>
-                        <th>Destination</th>
-                        <th>Transfer Needed By</th>
-                        <th>Status</th>
-                        <th>Transfer Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="date" class="form-control" id="created_at" name="created_at" required></td>
-                        <td><input type="number" class="form-control" id="user_id" name="user_id" required></td>
-                        <td><input type="text" class="form-control" id="study_subject_id" name="study_subject_id"></td>
-                        <td><input type="number" class="form-control" id="scan_id" name="scan_id" required></td>
-                        <td><input type="text" class="form-control" id="destination" name="destination"></td>
-                        <td><input type="date" class="form-control" id="transfer_needed_by" name="transfer_needed_by"></td>
-                        <td><input type="text" class="form-control" id="status" name="status"></td>
-                        <td><textarea class="form-control" id="comment" name="comment"></textarea></td>
-                    </tr>
-                </tbody>
-            </table>
-            <input type="submit" class="btn btn-primary" value="Submit">
-        </form>
+        {% for scantransfer in requests %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">User ID: {{ scantransfer.user_id}} </h5>
+                <h6 class="card-subtitle mb-2 text-muted">Scan ID: {{ scantransfer.scan_id }}</h6>
+                <p class="card-text">
+                    <strong>Destination: </strong> {{ scantransfer.destination }}
+                    <br>
+                    <strong>Needed By: </strong> {{ scantransfer.transfer_needed_by }}
+                </p>
+            </div>
+        </div>
+    {% endfor %}
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
