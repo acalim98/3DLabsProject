@@ -59,7 +59,7 @@ def add_subject():
         db.session.add(new_subject)
         db.session.commit()
         return redirect(url_for('subjects_index'))
-    return render_template('add.html')
+    return render_template('newscantransfer.html')
 
 
 @app.route('/edit_subject/<int:id>', methods=('GET', 'POST'))

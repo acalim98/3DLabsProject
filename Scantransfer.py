@@ -86,7 +86,7 @@ def index():
     return render_template('scantransfer.html', requests=requests)
 
 
-@app.route('/add', methods=('GET', 'POST'))
+@app.route('/addscantransfer', methods=('GET', 'POST'))
 def add():
     if request.method == 'POST':
         request = ScanTransferRequest(
@@ -101,7 +101,7 @@ def add():
         )
         db.session.add(request)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('ScanTransferIndex'))
 
     return render_template('add.html')
 
@@ -122,7 +122,7 @@ def edit(id):
         db.session.commit()
         return redirect(url_for('index'))
 
-    return render_template('edit.html', request=request)
+    return render_template('newscantransfer.html', request=request)
 
 
 @app.route('/delete/<int:id>', methods=('POST',))
